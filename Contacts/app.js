@@ -1,6 +1,9 @@
+var alertNode = require('alert-node');
 var express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -14,13 +17,13 @@ const LoginSchema = new Schema({
 });
 
 const ContactSchema = new Schema({
-    contactName: {'type':String, 'unique': true, 'required' : true,index: true},
+    contactName: {'type':String, 'unique': true, 'required' : true, index: true},
     phoneNumber: {'type':Number, 'unique': true, 'required' : true},
 
 });
 
-const  UserCredentials = mongoose.model('userCredentials',LoginSchema );
-
+const  UserCredentials = mongoose.model('userCredentials', LoginSchema);
+var UserData = null;
 //const UserData = mongoose.model('rahul', ContactSchema);
 app = express();
 //
@@ -43,30 +46,14 @@ app.post('/login', urlencodedParser, function (req, res) {
     if(err) throw err;
     //console.log(resdata);
    if(resdata.length === 0)
+   //ToDo: add some error msg through css
     res.render('loginpage');
     else {
-    //  var user = new UserCredentials(data);
-    //  user.save();
-  //    console.log('item saved');
-  console.log(req.body.username);
-//  mongoose.connect('mongodb://localhost/'+req.body.username);
-//mongoose.connection.close();
-//mongoose.connect('mongodb://localhost/userContact');
-  const Contact = mongoose.model(req.body.username, ContactSchema);
-  var contactData = {
-    contactName: 'raj',
-    phoneNumber: '9177590065'
-  };
-
-  var contact = new Contact(contactData);
-  Contact.create(contact);
-      res.render('home', {results:[]});
-
-  //  res.send(resdata);
+    console.log(req.body.username);
+     UserData = mongoose.model(req.body.username, ContactSchema);
+        res.render('home', {results:[]});
    }
-
 });
-
 });
 
 app.post('/push', urlencodedParser, function (req, res) {
@@ -88,18 +75,16 @@ app.post('/push', urlencodedParser, function (req, res) {
          res.render('loginpage');
    //  res.send(resdata);
     }
-
-
  });
 }
 else {
-//  alert('Invalid details');
+//res.send('<script>alert('Invalid details');</script>')
   res.render('loginpage');
 }
   //res.render('homepage',{results:{}});
 });
 
-app.get('/login',function(req, res) {
+app.get('/',function(req, res) {
   res.render('loginpage');
 //res.sendFile(__dirname + '/loginpage.html');
 });
@@ -110,9 +95,44 @@ var data={username: req.query.username};*/
 app.post('/search', urlencodedParser, function (req, res) {
   //var data={username: "/^"+req.body.username+"/"};
   //  console.log(data);
-    UserCredentials.find(req.body,function(err, resdata){
+       UserData.find(req.body,function(err, resdata){
       if(err) throw err;
       console.log(resdata);
       res.render('home',{results: resdata});
 });
+});
+
+app.post('/createNewContact', urlencodedParser, function (req, res) {
+//  var contact = new UserData(contactData);
+//ToDo:once duplicate error occurs show error msg
+/*var small = new UserData(req.body);
+small.save(function (err) {
+  if (err) return handleError(err);
+  // saved!
+})
+Tank.create({ size: 'small' }, function (err, small) {
+  if (err) return handleError(err);
+  // saved!
+})*/
+var err=0;
+  UserData.create(req.body,function (err) {
+    if (err)
+    {
+      err=1;
+      return err;
+    }
+  });
+  if(!Boolean(err))
+  {
+    console.log(Boolean(err));
+    res.render('home',{results: []});
+  }
+  else
+  {
+    console.log(Boolean(err));
+      // alertNode('Contact already exists');
+      alert('sup brah');
+  }
+  //  res.send(500,'');
+
 });
