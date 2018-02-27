@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <style media="screen">
+
+      </style>
+      <script type="text/javascript">
+        $(document).ready(function(){
+            $(".signup").hide();
+          $("#signup").click(function(){
+            //add comment
+              $(".nav li").removeClass("active");
+              $(this).addClass("active");
+            //add comments
+              $(".login").hide();
+              $(".signup").show();
+          });
+          $("#login").click(function(){
+            $(".nav li").removeClass("active");
+            $(this).addClass("active");
+              $(".signup").hide();
+              $(".login").show();
+          });
+        });
+
+      </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="container">
+        <div class="col-sm-5">
+          <ul class="nav nav-tabs nav-justified" >
+            <li class="active"id="login"><a href="#">Log In</a></li>
+            <li id="signup"><a href="#register">Sign Up</a></li>
+          </ul>
+        </div>
+      </div>
+
+
+    <!--    <a href=""><input class="btn btn-primary col-sm-1"type="button" name="" value="Sign Up"></a>
+        <a href="register.html"><input class="btn btn-primary col-sm-1"type="button" name="" value="Log In"></a> -->
+        <div class="container login">
+          <form class="col-sm-5" action="/login" method="POST">
+            <div class="form-group">
+              <span>UserName:</span>
+              <input class="form-control" type="text" name="username" value="" id='username' required>
+            </div>
+            <div class="form-group">
+              <span>Password:</span>
+              <input class="form-control" type="password" name="password" value="" id='password' required>
+            </div>
+            <input class="btn btn-primary"type="submit" name="" value="Signin">
+          </form>
+        </div>
+
+        <div id="register"class="container   signup">
+        <form class="col-sm-5" action="/push" method="POST" >
+          <div class=form-group"">
+            <label class="">UserName:</label>
+            <input class ="form-control" type="text" name="username"  value="" required>
+          </div>
+          <div class="form-group">
+            <label>Password:</label>
+            <input class="form-control" type="password" name="password" value="" required>
+          </div>
+          <div class="form-group">
+            <label>ConfirmPassword:</label>
+            <input class="form-control " type="password" name="confirmPassword" value="" required>
+          </div>
+          <input type="submit" name="" value="Create An Account"  class="btn btn-primary">
+        </form>
+        </div>
+  </div>
+<!--  <div class="contaienr">
+    <ul class="">
+      <div class="col-sm-2 panel panel-default">
+        <div class="panel panel-header">
+          <a href="#">edit</a>
+          <a href="#">delete</a>
+        </div>
+        <li class="">rahul</li>
+        <li class="">9177590065 </li>
+      </div>
+      <div class="col-sm-2 panel panel-default">
+        <li class="">rahul</li>
+        <li class="">9177590065 </li>
+      </div>
+      <div class="col-sm-2 panel panel-default">
+        <li class="">rahul</li>
+        <li class="">9177590065 </li>
+      </div>
+      <div class="col-sm-2 panel panel-default">
+        <li class="">rahul</li>
+        <li class="">9177590065 </li>
+      </div>
+      <div class="col-sm-2 panel panel-default">
+        <li class="">rahul</li>
+        <li class="">9177590065 </li>
+      </div>
+      <div class="col-sm-2 panel panel-default">
+        <li class="">rahul</li>
+        <li class="">9177590065 </li>
+      </div>
+      <div class="col-sm-2 panel panel-default">
+        <li class="">rahul</li>
+        <li class="">9177590065 </li>
+      </div>
+      <div class="col-sm-2 panel panel-default">
+        <li class="">rahul</li>
+        <li class="">9177590065 </li>
+      </div>
+      <div class="col-sm-2 panel panel-default">
+        <li class="">rahul</li>
+        <li class="">9177590065 </li>
+      </div>
+
+
+
+   </ul>
+  </div>
+-->
+  </body>
+</html>

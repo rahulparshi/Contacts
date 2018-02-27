@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="/popup.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">
+        function changeName(e) {
+      //source:https://stackoverflow.com/questions/3487263/how-to-use-onclick-or-onselect-on-option-tag-in-a-jsp-page
+          document.getElementById('search').name=e.value;
+        //  var selectBox = document.getElementById("selectBox");
+      //var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+      //alert(selectedValue);
+        }
+        </script>
+    </head>
+    <body>
+
+        <!-- popup code -->
+        <div id="new-contact" class="popup" href="#">
+            <div class="popup-content">
+              <!--  <img src="popup.jpg" alt="xmas-sale" />  -->
+              <form class="" action="/createNewContact" method="POST">
+                <span>ContactName:</span>
+                <input type="text" name="contactName" value="" id="create-contact-name">
+                <br>
+                <span>PhoneNumber:</span>
+                <input type="text" name="phoneNumber" value="" id="create-phone-number" pattern="\d{10}" title="Enter 10 digits">
+                <br>
+                <input type="submit"  value="Create" >
+                <a href="#" class="close">x</a>
+                </form>
+            </div>
+        </div>
+
+        <!-- normal page code -->
+        <div class="wrapper">
+            <h1>home page of search</h1>
+            <div class='col-lg-2' id="testdisplay">
+    <a href="/logout" class="float-right"><b>Log  Out</b></a>
+</div>
+            <span><a href="#new-contact" class="button">Create new contact</a></span>
+            <form class="" action="/search" method="POST">
+              <input type="text" name="contactName" value="" id="search">
+              <select id="selectBox" onchange="changeName(this)">
+                <option  value="contactName" >ContactName</option>
+                <option value="phoneNumber">PhoneNumber</option>
+                <option value="Gmail">Gmail</option>
+              </select>
+              <input type="submit" name="" value="search">
+            </form>
+            <ul>
+               <% for(var i=0; i< results.length; i++){ %>
+                   <li><%= results[i].contactName %> </li>
+                   <li><%= results[i].phoneNumber %> </li>
+             <% } %>
+           </ul>
+            </div>
+    </body>
+</html>
